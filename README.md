@@ -54,6 +54,10 @@ The application uses PostgreSQL with the following tables:
 - Database: PostgreSQL
 - Containerization: Docker with Docker Compose
 
+## Source
+
+-  https://gist.github.com/ureg-tech/622212f4870e1972dae4691ed6318d04
+
 ## Screenshots
 
 ![Exchange Rates Dashboard](./Forex-test/Screenshot%202025-11-16%20105229.png "Exchange Rates Dashboard")
