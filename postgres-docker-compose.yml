@@ -1,0 +1,39 @@
+# C:\Users\honjm\U-Reg Coding Challenge\postgres-docker-compose.yml
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: forex
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  backend:
+    build: ./ureg-forex-app/backend
+    ports:
+      - "3001:3001"
+    environment:
+      DB_HOST: db
+      DB_USER: postgres
+      DB_PASSWORD: password
+      DB_NAME: forex
+      DB_PORT: 5432
+    depends_on:
+      - db
+
+  frontend:
+    build: ./ureg-forex-app/frontend
+    ports:
+      - "4173:4173"
+    environment:
+      VITE_API_URL: http://localhost:3001/api  # Ensure /api is included
+      HOST: 0.0.0.0
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
